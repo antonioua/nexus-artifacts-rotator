@@ -1,0 +1,18 @@
+image: node:10-alpine
+
+
+stages:
+- run
+
+
+run:
+  stage: run
+  cache: {}
+  before_script: []
+  script:
+  - npm i --production
+  - echo ${nexus_user} ${nexus_pass}
+  - node script.js --nxuser="${nexus_user}" --nxpass="${nexus_pass}"
+  only:
+  - schedules
+  - pipelines
